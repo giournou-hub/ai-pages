@@ -1,0 +1,46 @@
+export default {
+  async fetch(request) {
+    if (request.method !== "POST") {
+      return new Response("Only POST allowed", { status: 405 });
+    }
+
+    const { prompt } = await request.json();
+
+    const html = `
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>${prompt}</title>
+<style>
+body { font-family: Arial; background:#f5f7fa; padding:40px; }
+.container { max-width:900px; margin:auto; background:white; padding:30px; border-radius:10px; }
+h1 { color:#111827; }
+section { margin-top:25px; }
+button { background:#2563eb; color:white; padding:12px 20px; border:none; border-radius:6px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>${prompt}</h1>
+  <section>
+    <h2>About</h2>
+    <p>This page was generated instantly using AI.</p>
+  </section>
+  <section>
+    <h2>Services</h2>
+    <p>Fast, clean and conversion-focused web pages.</p>
+  </section>
+  <section>
+    <button>Contact Us</button>
+  </section>
+</div>
+</body>
+</html>
+`;
+
+    return new Response(JSON.stringify({ html }), {
+      headers: { "Content-Type": "application/json" }
+    });
+  }
+};
