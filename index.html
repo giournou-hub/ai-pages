@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>مولد صفحات ذكية</title>
+</head>
+<body>
+
+<h2>أنشئ صفحة بالذكاء الاصطناعي</h2>
+
+<textarea id="prompt" style="width:100%;height:100px"
+placeholder="اكتب وصف الصفحة هنا"></textarea>
+
+<br><br>
+<button onclick="generate()">إنشاء الصفحة</button>
+
+<hr>
+
+<iframe id="result" style="width:100%;height:400px;"></iframe>
+
+<script>
+function generate(){
+  let text = prompt.value;
+  let html = `
+  <html>
+    <body>
+      <h1>${text}</h1>
+      <p>صفحة تم إنشاؤها تلقائيًا</p>
+      <button>تواصل</button>
+    </body>
+  </html>
+  `;
+  result.srcdoc = html;
+}
+</script>
+
+</body>
+</html>
